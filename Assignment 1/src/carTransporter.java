@@ -57,13 +57,15 @@ public class carTransporter extends Flatbed{
         else if(this.getX() != car.getX() || this.getY() != car.getY()){
             throw new IllegalArgumentException("Too far away, cannot load.");
         }
-        else { stack.push(car); }
-
+        else {
+            stack.push(car);
+            car.isLoaded = true;
+        }
     }
 
     public void unloadCar(){
-        
-        stack.pop();
+         Car x = (Car) stack.pop();
+         x.isLoaded = false;
     }
 
 }

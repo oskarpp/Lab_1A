@@ -23,13 +23,15 @@ public class test {
     public void checkLoadCar(){
         //test1.startEngine();
         //test1.move();
-        out.println(test4.stack);
+        //out.println(test4.stack);
+        out.println(test1.isLoaded);
         test4.loadCar(test1);
-        test4.loadCar(test2);
-        out.println(test4.stack);
+        out.println(test1.isLoaded);
         test4.unloadCar();
-        out.println(test4.stack);
+        out.println(test1.isLoaded);
+        //out.println(test4.stack);
     }
+
     @Test
     public void checkFlatbedAngle(){
         //out.println(test1.getFlatbedAngle());
