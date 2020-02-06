@@ -18,6 +18,7 @@ public class Volvo240 extends Car{
         modelName = "Volvo240";
         stopEngine();
     }
+
     /**
      * Checks the state of a number of things and returns a value used to calculate speed increase/decrease
      * @return
@@ -30,6 +31,7 @@ public class Volvo240 extends Car{
     public void incrementSpeed(double amount) {
             currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
     }
+
     @Override
     public void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);

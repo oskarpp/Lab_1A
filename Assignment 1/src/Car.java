@@ -1,6 +1,8 @@
 import java.awt.*;
+import java.lang.Math;
 
 public abstract class Car implements Movable{
+
     public  int nrDoors; // Number of doors on the car
     public double enginePower; // Engine power of the car
     public double currentSpeed; // The current speed of the car
@@ -47,6 +49,8 @@ public abstract class Car implements Movable{
     public Color getColor(){
         return color;
     }
+
+
 
     /**
      * Setters
@@ -113,7 +117,6 @@ public abstract class Car implements Movable{
     /**
      * Moves the car in the current direction, turns the car left or right
      */
-    @Override
     public void move() {
         if (dir == direction.SOUTH){
             setY(y - currentSpeed);
@@ -128,7 +131,6 @@ public abstract class Car implements Movable{
             setX(x + currentSpeed);
         }
     }
-    @Override
     public void turnLeft() {
         if (dir == direction.SOUTH){
             setDir(direction.EAST);
@@ -143,7 +145,6 @@ public abstract class Car implements Movable{
             setDir(direction.SOUTH);
         }
     }
-    @Override
     public void turnRight() {
         if (dir == direction.SOUTH){
             setDir(direction.WEST);
@@ -158,6 +159,9 @@ public abstract class Car implements Movable{
             setDir(direction.NORTH);
         }
     }
+
+
+
 
     /**
      * Is called from the gas/brake method.

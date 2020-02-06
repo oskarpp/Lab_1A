@@ -12,9 +12,30 @@ import static junit.framework.TestCase.assertTrue;
 public class test {
     Volvo240 test1 = new Volvo240();
     Saab95 test2 = new Saab95();
+    Scania test3 = new Scania();
+    carTransporter test4 = new carTransporter();
+    Car test5 = new Scania();
 
     @Before
     public void init(){
+    }
+    @Test
+    public void checkLoadCar(){
+        //test1.startEngine();
+        //test1.move();
+        out.println(test4.stack);
+        test4.loadCar(test1);
+        test4.loadCar(test2);
+        out.println(test4.stack);
+        test4.unloadCar();
+        out.println(test4.stack);
+    }
+    @Test
+    public void checkFlatbedAngle(){
+        //out.println(test1.getFlatbedAngle());
+        //out.println(test2.getFlatbedAngle());
+        out.println(test3.getFlatbedAngle());
+        out.println(test4.getFlatbedAngle());
     }
     @Test
     public void checknrDoors(){
@@ -22,7 +43,8 @@ public class test {
     }
     @Test
     public void checkColor(){
-        assertTrue(test1.getColor() == Color.black && test2.getColor() == Color.red);
+        assertTrue(test1.getColor() == Color.black && test2.getColor() == Color.red && test3.getColor() == Color.black && test4.getColor() == Color.yellow);
+        //out.println(test3.getColor());
     }
     @Test
     public void checkEnginePower(){
