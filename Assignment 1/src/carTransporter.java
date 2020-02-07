@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
+/**
+ * A flatbed Car that is able to load cars that does not have a flatbed.
+ */
 public class carTransporter extends Flatbed{
 
     public carTransporter(){
@@ -16,8 +19,12 @@ public class carTransporter extends Flatbed{
         maxAngle = 45;
         minAngle = -45;
     }
+
+    /**
+     * Specifies the max amount of cars that can be loaded
+     */
     int maxCapacity = 4;
-    
+
     private double speedFactor() {
         return enginePower * 0.01;
     }
@@ -34,7 +41,8 @@ public class carTransporter extends Flatbed{
     }
 
     /**
-     * Added condition that flatbed must be lowered to increment speed.
+     * Overrides the method that lifts/lowers the flatbed with a specific degree
+     * this is because carTransporter should only be able to switch between min and max mode.
      * @param degree
      */
     @Override
@@ -46,6 +54,10 @@ public class carTransporter extends Flatbed{
         flatbedAngle = minAngle;
     }
 
+    /**
+     * Loads a car onto the carTransporter if it meets the requirements. Error handling added.
+     * @param car a Car that is not a flatbed truck.
+     */
     public void loadCar(Car car){
         if(car instanceof Flatbed){
             throw new IllegalArgumentException("Too big. Cannot load flatbed trucks.");
@@ -64,6 +76,10 @@ public class carTransporter extends Flatbed{
             car.isLoaded = true;
         }
     }
+
+    /**
+     * Unloads the last car if the ramp is down
+     */
     public void unloadCar(){
         if(this.getFlatbedAngle() == minAngle){
             Car x = (Car) getDeque().pop();
