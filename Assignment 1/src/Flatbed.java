@@ -51,7 +51,7 @@ public abstract class Flatbed extends Car{
             flatbedDecrement();
         }
     }
-    
+
     public void flatbedIncrement(int degree){
         flatbedAngle = flatbedAngle + degree;
     }

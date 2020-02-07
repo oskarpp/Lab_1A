@@ -17,9 +17,26 @@ public class test {
     carTransporter test4 = new carTransporter();
     carTransporter test5 = new carTransporter();
 
+    Volvo_Autoshop auto1 = new Volvo_Autoshop();
+    General_Autoshop auto2 = new General_Autoshop();
+
 
     @Before
     public void init(){
+    }
+
+    @Test
+    public void checkAutoshopPickup(){
+        auto2.putCar(test1);
+        auto2.putCar(test2);
+        out.println(auto2.getList());
+        auto2.pickupCar(test1);
+        out.println(auto2.getList());
+    }
+    @Test
+    public void checkAutoshop(){
+        auto1.getList().add(test1);
+        out.println(auto1.getList());
     }
     @Test
     public void checkLoadCar(){
@@ -48,12 +65,8 @@ public class test {
         out.println(test2.getX());
         out.println(test2.getY());
     }
-
     @Test
     public void checkFlatbedAngle(){
-        //out.println(test1.getFlatbedAngle());
-        //out.println(test2.getFlatbedAngle());
-        //out.println(test3.getFlatbedAngle());
         out.println(test4.getFlatbedAngle());
     }
     @Test
