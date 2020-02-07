@@ -13,30 +13,47 @@ public class test {
     Volvo240 test1 = new Volvo240();
     Saab95 test2 = new Saab95();
     Scania test3 = new Scania();
+
     carTransporter test4 = new carTransporter();
-    Car test5 = new Scania();
+    carTransporter test5 = new carTransporter();
+
 
     @Before
     public void init(){
     }
     @Test
     public void checkLoadCar(){
-        //test1.startEngine();
-        //test1.move();
-        //out.println(test4.stack);
-        out.println(test1.isLoaded);
+        test4.lowerFlatbed();
+        test5.lowerFlatbed();
         test4.loadCar(test1);
-        out.println(test1.isLoaded);
-        test4.unloadCar();
-        out.println(test1.isLoaded);
-        //out.println(test4.stack);
+        test5.loadCar(test2);
+
+        test4.startEngine();
+        test5.startEngine();
+
+        test4.move();
+
+        test5.turnRight();
+        test5.move();
+
+        out.println(test4.getX());
+        out.println(test4.getY());
+        out.println("##################-------######################");
+        out.println(test1.getX());
+        out.println(test1.getY());
+        out.println("##############################################");
+        out.println(test5.getX());
+        out.println(test5.getY());
+        out.println("##################-------######################");
+        out.println(test2.getX());
+        out.println(test2.getY());
     }
 
     @Test
     public void checkFlatbedAngle(){
         //out.println(test1.getFlatbedAngle());
         //out.println(test2.getFlatbedAngle());
-        out.println(test3.getFlatbedAngle());
+        //out.println(test3.getFlatbedAngle());
         out.println(test4.getFlatbedAngle());
     }
     @Test

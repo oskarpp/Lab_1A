@@ -1,20 +1,27 @@
+import java.util.Deque;
+
 public abstract class Flatbed extends Car{
 
-    public int flatbedAngle; // flakts vinkel
+    public int flatbedAngle;
     int maxAngle;
     int minAngle;
-    int allowedDegree = maxAngle - minAngle;
+
 
     public int getFlatbedAngle() {
         return flatbedAngle;
     }
 
+    public int allowedDegree(){
+        return Math.abs(maxAngle - minAngle);
+    }
+
     /**
-     * Increment flatbed angle with
+     * Two different ways to lower and lift flatbed, call with a degree to as argument to lower or lift with specific degree.
+     * Call wit our the argument to switch between max and min mode.
      * @param degree this degree (value limited by allowedDegree)
      */
     public void liftFlatbed(int degree){
-        if (getCurrentSpeed() == 0 && degree >= 0 && degree <= Math.abs(allowedDegree)) {
+        if (getCurrentSpeed() == 0 && degree >= 0 && degree <= allowedDegree()) {
             int i = maxAngle;
             flatbedIncrement(degree);
             int j = flatbedAngle;
@@ -27,24 +34,24 @@ public abstract class Flatbed extends Car{
             throw new IllegalArgumentException(INV_ARG);
         }
     }
-    /**
-     * Decrement flatbed for a car's flatbed
-     * @param degree
-     */
     public void lowerFlatbed(int degree){
-        if (degree >= 0 && degree <= Math.abs(allowedDegree)) {
+        if (currentSpeed == 0 && degree >= 0 && degree <= allowedDegree()) {
             flatbedDecrement(degree);
         } else {
             throw new IllegalArgumentException(INV_ARG);
         }
     }
-
-    //Override
-
-    /**
-     * Is called from the liftFlatbed/lowerFlatbed method.
-     * Does nothing unless a  method with the same name is also defined as Override in the car subclass
-     */
+    public void liftFlatbed(){
+        if(currentSpeed == 0){
+            flatbedIncrement();
+        }
+    }
+    public void lowerFlatbed(){
+        if(currentSpeed == 0){
+            flatbedDecrement();
+        }
+    }
+    
     public void flatbedIncrement(int degree){
         flatbedAngle = flatbedAngle + degree;
     }
@@ -59,9 +66,6 @@ public abstract class Flatbed extends Car{
         }
     }
 
-    /**
-     * Added condition that flatbed must be lowered to increment speed.
-     */
     public void flatbedIncrement(){
         flatbedAngle = maxAngle;
     }
@@ -70,6 +74,7 @@ public abstract class Flatbed extends Car{
             flatbedAngle = minAngle;
         }
     }
+
 
 
 }

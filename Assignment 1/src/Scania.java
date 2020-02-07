@@ -23,7 +23,6 @@ public class Scania extends Flatbed{
             currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
         }
     }
-
     @Override
     public void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);

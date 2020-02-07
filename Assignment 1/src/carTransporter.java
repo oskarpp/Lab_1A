@@ -17,8 +17,6 @@ public class carTransporter extends Flatbed{
         minAngle = -45;
     }
 
-    Deque<? super Car> stack = new ArrayDeque(4);
-
     private double speedFactor() {
         return enginePower * 0.01;
     }
@@ -29,7 +27,6 @@ public class carTransporter extends Flatbed{
             currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
         }
     }
-
     @Override
     public void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
@@ -45,9 +42,7 @@ public class carTransporter extends Flatbed{
     }
     @Override
     public void flatbedDecrement(int degree){
-        if(getCurrentSpeed() == 0){
-            flatbedAngle = minAngle;
-        }
+        flatbedAngle = minAngle;
     }
 
     public void loadCar(Car car){
@@ -56,16 +51,25 @@ public class carTransporter extends Flatbed{
         }
         else if(this.getX() != car.getX() || this.getY() != car.getY()){
             throw new IllegalArgumentException("Too far away, cannot load.");
+        } else if (getDeque().size() == 4) {
+            throw new IllegalArgumentException("Transport is full.");
+        } else if(car.isLoaded){
+            throw new IllegalArgumentException("This car is already loaded.");
         }
-        else {
-            stack.push(car);
+        else if(this.getFlatbedAngle() != minAngle){
+            throw new IllegalArgumentException("Ramp is up, cannot load.");
+        } else {
+            getDeque().push(car);
             car.isLoaded = true;
         }
     }
-
     public void unloadCar(){
-         Car x = (Car) stack.pop();
-         x.isLoaded = false;
+        if(this.getFlatbedAngle() == minAngle){
+            Car x = (Car) getDeque().pop();
+            x.isLoaded = false;
+        } else {
+            throw new IllegalArgumentException("Ramp is up, cannot unload.");
+        }
     }
 
 }

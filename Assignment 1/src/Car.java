@@ -1,23 +1,39 @@
 import java.awt.*;
 import java.lang.Math;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Iterator;
 
 public abstract class Car implements Movable{
+
+    final static String INV_ARG = "Value not allowed"; //
 
     public  int nrDoors; // Number of doors on the car
     public double enginePower; // Engine power of the car
     public double currentSpeed; // The current speed of the car
     public Color color; // Color of the car
     public String modelName; //The car model name
-    public boolean isLoaded;
 
-    final static String INV_ARG = "Value not allowed"; //
+    /**
+     * Handling of cars transported on other cars.
+     */
+    public boolean isLoaded;
+    Deque<? super Car> stack = new ArrayDeque();
+    public void moveCar(double x, double y){
+        Iterator itr = getDeque().iterator();
+        while(itr.hasNext()){
+            Car car = (Car) itr.next();
+            car.setX(x);
+            car.setY(y);
+        }
+    }
+
     /**
      * Representations of Direction and position
      */
     private double x = 0;
     private double y = 0;
     private direction dir = direction.NORTH;
-    
     public enum direction{
         NORTH, SOUTH, WEST, EAST
     }
@@ -34,24 +50,19 @@ public abstract class Car implements Movable{
     public direction getDir(){
         return dir;
     }
-
     public int getNrDoors(){
         return nrDoors;
     }
-
     public double getEnginePower(){
         return enginePower;
     }
-
     public double getCurrentSpeed(){
         return currentSpeed;
     }
-
     public Color getColor(){
         return color;
     }
-
-
+    public Deque getDeque(){ return stack;}
 
     /**
      * Setters
@@ -70,7 +81,6 @@ public abstract class Car implements Movable{
     public void startEngine(){
         currentSpeed = 0.1;
     }
-
     public void stopEngine(){
         currentSpeed = 0;
     }
@@ -99,7 +109,6 @@ public abstract class Car implements Movable{
      * Decreases the speed of the car
      * @param amount a value in the interval [0,1]
      */
-
     public void brake(double amount) {
         if (amount >= 0 && amount <= 1){
             double min = 0;
@@ -119,18 +128,43 @@ public abstract class Car implements Movable{
      * Moves the car in the current direction, turns the car left or right
      */
     public void move() {
+        if(isLoaded){
+            throw new IllegalArgumentException("Car cannot move, is loaded on another truck.");
+        }
         if (dir == direction.SOUTH){
             setY(y - currentSpeed);
+            if (getDeque().size() != 0) {
+                double x = getX();
+                double y = getY();
+                moveCar(x, y);
+            }
         }
         if (dir == direction.NORTH){
             setY(y + currentSpeed);
+            if (getDeque().size() != 0) {
+                double x = getX();
+                double y = getY();
+                moveCar(x, y);
+            }
         }
         if (dir == direction.WEST){
             setX(x - currentSpeed);
+            if (getDeque().size() != 0) {
+                double x = getX();
+                double y = getY();
+                moveCar(x, y);
+            }
         }
         if (dir == direction.EAST){
             setX(x + currentSpeed);
+            if (getDeque().size() != 0) {
+                double x = getX();
+                double y = getY();
+                moveCar(x, y);
+            }
         }
+
+
     }
     public void turnLeft() {
         if (dir == direction.SOUTH){
@@ -160,9 +194,6 @@ public abstract class Car implements Movable{
             setDir(direction.NORTH);
         }
     }
-
-
-
 
     /**
      * Is called from the gas/brake method.
