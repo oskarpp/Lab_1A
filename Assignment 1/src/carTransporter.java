@@ -18,6 +18,7 @@ public class carTransporter extends Flatbed{
         flatbedAngle = 45;
         maxAngle = 45;
         minAngle = -45;
+        safeAngle = 45;
     }
 
     /**
@@ -31,9 +32,7 @@ public class carTransporter extends Flatbed{
 
     @Override
     public void incrementSpeed(double amount) {
-        if(flatbedAngle == 0){
-            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
-        }
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
     }
     @Override
     public void decrementSpeed(double amount){
@@ -48,10 +47,12 @@ public class carTransporter extends Flatbed{
     @Override
     public void flatbedIncrement(int degree){
         flatbedAngle = maxAngle;
+        checkIfSafe();
     }
     @Override
     public void flatbedDecrement(int degree){
         flatbedAngle = minAngle;
+        checkIfSafe();
     }
 
     /**

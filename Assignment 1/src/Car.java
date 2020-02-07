@@ -19,7 +19,7 @@ public abstract class Car implements Movable{
      */
     public boolean isLoaded;
     Deque<? super Car> stack = new ArrayDeque();
-    public void moveCar(double x, double y){
+    private void moveCar(double x, double y){
         Iterator itr = getDeque().iterator();
         while(itr.hasNext()){
             Car car = (Car) itr.next();
@@ -27,6 +27,7 @@ public abstract class Car implements Movable{
             car.setY(y);
         }
     }
+    public boolean isUnsafe;
 
     /**
      * Representations of Direction and position
@@ -130,6 +131,9 @@ public abstract class Car implements Movable{
     public void move() {
         if(isLoaded){
             throw new IllegalArgumentException("Car cannot move, is loaded on another truck.");
+        }
+        if(isUnsafe){
+            throw new IllegalArgumentException("Car cannot move. Flatbed in the wrong position.");
         }
         if (dir == direction.SOUTH){
             setY(y - currentSpeed);

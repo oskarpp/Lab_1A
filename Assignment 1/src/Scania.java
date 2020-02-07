@@ -11,6 +11,7 @@ public class Scania extends Flatbed{
         flatbedAngle = 0;
         maxAngle = 70;
         minAngle = 0;
+        safeAngle = 0;
     }
 
     private double speedFactor() {
@@ -18,8 +19,7 @@ public class Scania extends Flatbed{
     }
 
     @Override
-    public void incrementSpeed(double amount) {
-        if(flatbedAngle == 0){
+    public void incrementSpeed(double amount) { {
             currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
         }
     }

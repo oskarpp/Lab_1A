@@ -3,6 +3,7 @@
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Assert;
 import static java.lang.System.out;
 
 import java.awt.*;
@@ -15,7 +16,6 @@ public class test {
     Scania test3 = new Scania();
 
     carTransporter test4 = new carTransporter();
-    carTransporter test5 = new carTransporter();
 
     Volvo_Autoshop auto1 = new Volvo_Autoshop();
     General_Autoshop auto2 = new General_Autoshop();
@@ -38,38 +38,7 @@ public class test {
         auto1.getList().add(test1);
         out.println(auto1.getList());
     }
-    @Test
-    public void checkLoadCar(){
-        test4.lowerFlatbed();
-        test5.lowerFlatbed();
-        test4.loadCar(test1);
-        test5.loadCar(test2);
-
-        test4.startEngine();
-        test5.startEngine();
-
-        test4.move();
-
-        test5.turnRight();
-        test5.move();
-
-        out.println(test4.getX());
-        out.println(test4.getY());
-        out.println("##################-------######################");
-        out.println(test1.getX());
-        out.println(test1.getY());
-        out.println("##############################################");
-        out.println(test5.getX());
-        out.println(test5.getY());
-        out.println("##################-------######################");
-        out.println(test2.getX());
-        out.println(test2.getY());
-    }
-    @Test
-    public void checkFlatbedAngle(){
-        out.println(test4.getFlatbedAngle());
-    }
-    @Test
+        @Test
     public void checknrDoors(){
         assertTrue(test1.getNrDoors() == 4 && test2.getNrDoors() == 2);
     }
@@ -178,5 +147,33 @@ public class test {
         } else { test1.setColor(Color.darkGray);}
         assertTrue(test1.getColor() != i);
     }
-
+    /**
+     * Making sure that the car cannot move if the Flatbed is in an unsafe position
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void checkFlatbedSafe(){
+        test3.liftFlatbed(30);
+        test3.startEngine();
+        test3.gas(0.5);
+        test3.move();
+    }
+    /**
+     * Check that the ramp can only be lowered if carTransport is standing still
+     */
+    @Test
+    public void checkRampLower(){
+        int a = test4.getFlatbedAngle();
+        test4.lowerFlatbed();
+        int b = test4.getFlatbedAngle();
+        assertTrue(a > b);
+    }
+    @Test
+    public void checkRampdoesNotLower(){
+        test4.startEngine();
+        test4.gas(1);
+        int a = test4.getFlatbedAngle();
+        test4.lowerFlatbed();
+        int b = test4.getFlatbedAngle();
+        assertTrue(a == b);
+    }
 }

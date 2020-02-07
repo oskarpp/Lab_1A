@@ -13,6 +13,16 @@ public abstract class Flatbed extends Car{
     public int flatbedAngle;
     int maxAngle;
     int minAngle;
+    int safeAngle;
+
+    public void checkIfSafe(){
+        if (flatbedAngle != safeAngle){
+            isUnsafe = true;
+        }
+        else {
+            isUnsafe = false;
+        }
+    }
 
     /**
      * Getter
@@ -64,7 +74,7 @@ public abstract class Flatbed extends Car{
         }
     }
     public void lowerFlatbed(){
-        if(currentSpeed == 0){
+        if(getCurrentSpeed() == 0){
             flatbedDecrement();
         }
     }
@@ -72,6 +82,7 @@ public abstract class Flatbed extends Car{
 
     public void flatbedIncrement(int degree){
         flatbedAngle = flatbedAngle + degree;
+        checkIfSafe();
     }
     public void flatbedDecrement(int degree){
         int i = minAngle;
@@ -82,15 +93,18 @@ public abstract class Flatbed extends Car{
         } else if (j >= i) {
             flatbedAngle = j;
         }
+        checkIfSafe();
     }
 
     public void flatbedIncrement(){
         flatbedAngle = maxAngle;
+        checkIfSafe();
     }
     public void flatbedDecrement(){
         if(getCurrentSpeed() == 0){
             flatbedAngle = minAngle;
         }
+        checkIfSafe();
     }
 
 
