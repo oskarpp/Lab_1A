@@ -16,7 +16,8 @@ public class carTransporter extends Flatbed{
         maxAngle = 45;
         minAngle = -45;
     }
-
+    int maxCapacity = 4;
+    
     private double speedFactor() {
         return enginePower * 0.01;
     }
@@ -51,7 +52,7 @@ public class carTransporter extends Flatbed{
         }
         else if(this.getX() != car.getX() || this.getY() != car.getY()){
             throw new IllegalArgumentException("Too far away, cannot load.");
-        } else if (getDeque().size() == 4) {
+        } else if (getDeque().size() == maxCapacity) {
             throw new IllegalArgumentException("Transport is full.");
         } else if(car.isLoaded){
             throw new IllegalArgumentException("This car is already loaded.");
