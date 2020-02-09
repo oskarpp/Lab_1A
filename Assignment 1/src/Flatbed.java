@@ -8,13 +8,20 @@ public abstract class Flatbed extends Car{
 
     /**
      * flatbedAngle holds the value of the current angle of the flatbed
-     * maxAngle/minAngle - Maximum and Minimum angle for the flatbed.
      */
     public int flatbedAngle;
+    /**
+     * maxAngle/minAngle - Maximum and Minimum angle for the flatbed.
+     */
     int maxAngle;
     int minAngle;
+    /**
+     * The allowed angle for a truck to be able to drive
+     */
     int safeAngle;
-
+    /**
+     * Added to the end of each lift/lower ramp to update the isSafe flag
+     */
     public void checkIfSafe(){
         if (flatbedAngle != safeAngle){
             isUnsafe = true;
@@ -79,7 +86,10 @@ public abstract class Flatbed extends Car{
         }
     }
 
-
+    /**
+     * These two are called by lift/lowerFlatbed
+     * @param degree
+     */
     public void flatbedIncrement(int degree){
         flatbedAngle = flatbedAngle + degree;
         checkIfSafe();

@@ -148,6 +148,10 @@ public class test {
         assertTrue(test1.getColor() != i);
     }
     /**
+     * Below are tests for lab 1 part B
+     */
+
+    /**
      * Making sure that the car cannot move if the Flatbed is in an unsafe position
      */
     @Test(expected = IllegalArgumentException.class)
@@ -169,11 +173,40 @@ public class test {
     }
     @Test
     public void checkRampdoesNotLower(){
-        test4.startEngine();
-        test4.gas(1);
         int a = test4.getFlatbedAngle();
+        test4.startEngine();
+        test4.gas(0.5);
         test4.lowerFlatbed();
         int b = test4.getFlatbedAngle();
         assertTrue(a == b);
     }
+    /**
+     * Check that the carTransport cannot load itself
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void loadSelf(){
+        test4.loadCar(test4);
+    }
+    /**
+     * loads car on transport
+     * moves transport
+     * checks that car and transport still have the same coordinates
+     */
+    @Test
+    public void transportCoordinates(){
+        test4.lowerFlatbed();
+        test4.loadCar(test1);
+        test4.liftFlatbed();
+        test4.startEngine();
+        test4.gas(1);
+        test4.move();
+        double a = test1.getX();
+        double b = test4.getX();
+        double c = test1.getY();
+        double d = test1.getY();
+        assertTrue(a == b && c == d);
+
+
+    }
+
 }
