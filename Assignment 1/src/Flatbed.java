@@ -61,7 +61,7 @@ public abstract class Flatbed extends Car{
             int j = flatbedAngle;
             if (i < j) {
                 flatbedAngle = i;
-            } else if (j <= i) {
+            } else {
                 flatbedAngle = j;
             }
         } else {
@@ -100,12 +100,11 @@ public abstract class Flatbed extends Car{
         int j = flatbedAngle;
         if (i > j) {
             flatbedAngle = i;
-        } else if (j >= i) {
+        } else {
             flatbedAngle = j;
         }
         checkIfSafe();
     }
-
     public void flatbedIncrement(){
         flatbedAngle = maxAngle;
         checkIfSafe();
