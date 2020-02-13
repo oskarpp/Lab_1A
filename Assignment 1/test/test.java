@@ -3,7 +3,7 @@
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert;
+
 import static java.lang.System.out;
 
 import java.awt.*;
@@ -15,7 +15,7 @@ public class test {
     Saab95 test2 = new Saab95();
     Scania test3 = new Scania();
 
-    carTransporter test4 = new carTransporter();
+    CarTransporter test4 = new CarTransporter();
 
     Volvo_Autoshop auto1 = new Volvo_Autoshop();
     General_Autoshop auto2 = new General_Autoshop();

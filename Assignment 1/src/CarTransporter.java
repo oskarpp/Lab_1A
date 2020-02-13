@@ -7,9 +7,9 @@ import java.util.List;
 /**
  * A flatbed Car that is able to load cars that does not have a flatbed.
  */
-public class carTransporter extends Flatbed{
+public class CarTransporter extends Flatbed{
 
-    public carTransporter(){
+    public CarTransporter(){
         nrDoors = 2;
         color = Color.yellow;
         enginePower = 125;
@@ -41,7 +41,7 @@ public class carTransporter extends Flatbed{
 
     /**
      * Overrides the method that lifts/lowers the flatbed with a specific degree
-     * this is because carTransporter should only be able to switch between min and max mode.
+     * this is because CarTransporter should only be able to switch between min and max mode.
      * @param degree
      */
     @Override
@@ -56,7 +56,7 @@ public class carTransporter extends Flatbed{
     }
 
     /**
-     * Loads a car onto the carTransporter if it meets the requirements. Error handling added.
+     * Loads a car onto the CarTransporter if it meets the requirements. Error handling added.
      * @param car a Car that is not a flatbed truck.
      */
     public void loadCar(Car car){
