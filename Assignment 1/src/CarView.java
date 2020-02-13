@@ -112,7 +112,7 @@ public class CarView extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 carC.brake(gasAmount);
             }
-        });
+        });                                                        // Added for brake
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

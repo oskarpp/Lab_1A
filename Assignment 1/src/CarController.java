@@ -45,6 +45,7 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
                 car.move();
+                actionCollision(car);
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
                 frame.drawPanel.moveit(x, y);
@@ -65,6 +66,21 @@ public class CarController {
         double brake = ((double) amount) / 100;
         for (Car car : cars){
             car.brake(brake);
+        }
+    } // Added for brake
+
+    public boolean collision(Car car){
+        if(car.getY() >= 300){ // 560
+            return true;
+        } else return false;
+    }
+    public void actionCollision(Car car){
+        if(collision(car)){
+            car.stopEngine();
+            car.turnRight();
+            car.turnRight();
+            car.setY(299);
+            car.startEngine();
         }
     }
 }
