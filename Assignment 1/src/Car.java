@@ -32,8 +32,8 @@ public abstract class Car implements Movable{
     /**
      * Representations of Direction and position
      */
-    private double x = 0;
-    private double y = 0;
+    private double x;
+    private double y;
     private direction dir = direction.NORTH;
     public enum direction{
         NORTH, SOUTH, WEST, EAST
