@@ -34,6 +34,7 @@ public class CarController {
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
 
+
         // Start the timer
         cc.timer.start();
     }
@@ -44,8 +45,12 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
+                //Saves the position of the car before moving it. Is used in actionCollision, if we collide.
+                double beforeX = car.getX();
+                double beforeY = car.getY();
                 car.move();
-                actionCollision(car);
+                actionCollision(car, beforeX, beforeY);
+
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
                 frame.drawPanel.moveit(x, y);
@@ -69,17 +74,24 @@ public class CarController {
         }
     } // Added for brake
 
-    public boolean collision(Car car){
-        if(car.getY() >= 300){ // 560
-            return true;
-        } else return false;
+    public boolean intersects(Car car) {
+        int a = frame.getCarViewHeigth()-300;
+        int b = frame.getCarViewWidth() -100;
+
+        boolean below = car.getY() > a;
+        boolean above = car.getY() < 0;
+        boolean left = car.getX() < 0;
+        boolean right = car.getX() > b;
+        return (above || below || left || right);
     }
-    public void actionCollision(Car car){
-        if(collision(car)){
+    public void actionCollision(Car car, double x, double y){
+        if(intersects(car)){
+            car.setX(x);
+            car.setY(y);
+
             car.stopEngine();
             car.turnRight();
             car.turnRight();
-            car.setY(299);
             car.startEngine();
         }
     }

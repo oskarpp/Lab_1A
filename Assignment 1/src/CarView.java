@@ -17,6 +17,9 @@ public class CarView extends JFrame{
     private static final int X = 800;
     private static final int Y = 800;
 
+    public int getCarViewWidth(){return X;}
+    public int getCarViewHeigth(){return Y;}
+
     // The controller member
     CarController carC;
 
