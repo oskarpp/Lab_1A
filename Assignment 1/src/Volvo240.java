@@ -2,7 +2,9 @@
  * Is a sub class to abstract class Car.
  */
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.IOException;
 
 public class Volvo240 extends Car{
 
@@ -17,7 +19,13 @@ public class Volvo240 extends Car{
         enginePower = 100;
         modelName = "Volvo240";
         stopEngine();
-    }
+        try {
+            carImg = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+        } catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
+        }
 
     /**
      * Checks the state of a number of things and returns a value used to calculate speed increase/decrease

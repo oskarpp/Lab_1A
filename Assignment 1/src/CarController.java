@@ -28,16 +28,16 @@ public class CarController {
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
-
+        Saab95 s = new Saab95();
+        s.setY(100);
+        Scania sc = new Scania();
+        sc.setY(200);
         cc.cars.add(new Volvo240());
-        cc.cars.add(new Saab95());
-        cc.cars.add(new Scania());
-
-
+        cc.cars.add(s);
+        cc.cars.add(sc);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
-
 
         // Start the timer
         cc.timer.start();
@@ -49,17 +49,16 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
-                //Saves the position of the car before moving it. Is used in actionCollision, if we collide.
+                 //Saves the position of the car before moving it. Is used in actionCollision, if we collide.
                 double beforeX = car.getX();
                 double beforeY = car.getY();
                 car.move();
                 if(intersects(car)){
                     actionCollision(car, beforeX, beforeY);
                 }
-
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
-                frame.drawPanel.moveit(car, x, y);
+                frame.drawPanel.moveit(cars);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
