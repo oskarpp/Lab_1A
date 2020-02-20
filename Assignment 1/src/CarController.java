@@ -92,6 +92,30 @@ public class CarController {
             }
         }
     }
+    void liftFlatbed(){
+        for (Car car : cars){
+            if (car instanceof Flatbed){
+                ((Flatbed) car).liftFlatbed();
+            }
+        }
+    }
+    void lowerFlatbed(){
+        for (Car car : cars){
+            if (car instanceof Flatbed){
+                ((Flatbed) car).lowerFlatbed();
+            }
+        }
+    }
+    void startCars(){
+        for (Car car : cars) {
+            car.startEngine();
+        }
+    }
+    void stopCars(){
+        for (Car car : cars){
+            car.stopEngine();
+        }
+    }
 
     public boolean intersects(Car car) {
         int a = frame.getCarViewHeigth()-300; // Hard coded value is for the the height of the panel + the height of the car image. To be fixed
