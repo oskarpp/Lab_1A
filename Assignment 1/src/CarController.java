@@ -78,10 +78,24 @@ public class CarController {
             car.brake(brake);
         }
     } // Added for brake
+    void setTurboOn() {
+        for (Car car : cars){
+            if (car instanceof Saab95){
+                ((Saab95) car).setTurboOn();
+            }
+        }
+    }
+    void setTurboOff() {
+        for (Car car : cars){
+            if (car instanceof Saab95){
+                ((Saab95) car).setTurboOff();
+            }
+        }
+    }
 
     public boolean intersects(Car car) {
-        int a = frame.getCarViewHeigth()-300;
-        int b = frame.getCarViewWidth() -100;
+        int a = frame.getCarViewHeigth()-300; // Hard coded value is for the the height of the panel + the height of the car image. To be fixed
+        int b = frame.getCarViewWidth() -100; // Hard coded value is for the width of the car image. To be fixed
 
         boolean below = car.getY() > a;
         boolean above = car.getY() < 0;
