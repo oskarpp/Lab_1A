@@ -118,13 +118,13 @@ public class CarController {
     }
 
     public boolean intersects(Car car) {
-        int a = frame.getCarViewHeigth()-300; // Hard coded value is for the the height of the panel + the height of the car image. To be fixed
-        int b = frame.getCarViewWidth() -100; // Hard coded value is for the width of the car image. To be fixed
+        int availableHeight = frame.getCarViewHeigth()-300; // Hard coded value is for the the height of the panel + the height of the car image. To be fixed
+        int availableWidth = frame.getCarViewWidth() -100; // Hard coded value is for the width of the car image. To be fixed
 
-        boolean below = car.getY() > a;
+        boolean below = car.getY() > availableHeight;
         boolean above = car.getY() < 0;
         boolean left = car.getX() < 0;
-        boolean right = car.getX() > b;
+        boolean right = car.getX() > availableWidth;
         return (above || below || left || right);
     }
     public void actionCollision(Car car, double x, double y){
