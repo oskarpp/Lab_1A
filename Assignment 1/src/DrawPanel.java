@@ -36,12 +36,5 @@ public class DrawPanel extends JPanel{
         for(Car car : carList){
             g.drawImage(assets.get(car),(int) car.getX(), (int) car.getY(), null);
         }
-
-        /*for (Car car : carList) { // For-loop to draw every car every time
-            int x =  (int) car.getX();
-            int y = (int) car.getY();
-            g.drawImage(car.carImg, x, y, null); // see javadoc for more info on the parameters
-        }
-         */
     }
-    }
+}

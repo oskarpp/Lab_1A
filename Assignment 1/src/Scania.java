@@ -14,14 +14,6 @@ public class Scania extends Flatbed{
         maxAngle = 70;
         minAngle = 0;
         safeAngle = 0;
-        /*
-        try {
-            carImg = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
-        } catch (IOException ex)
-        {
-            ex.printStackTrace();
-        }
-         */
     }
 
     private double speedFactor() {

@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class World {
@@ -18,7 +19,7 @@ public class World {
      * Konstruktor
      */
 
-    public World (){
+    public World () throws IOException {
         Saab95 s = new Saab95();
         s.setY(100);
         Scania sc = new Scania();
