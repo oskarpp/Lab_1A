@@ -15,16 +15,12 @@ import java.io.IOException;
  **/
 
 public class CarView extends JFrame{
-    private static final int X = 800;
-    private static final int Y = 800;
-
-    public int getCarViewWidth(){return X;}
-    public int getCarViewHeigth(){return Y;}
+    private static int X;
+    private static int Y;
 
     // The controller member
     CarController carC;
-
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    DrawPanel drawpanel;
 
     JPanel controlPanel = new JPanel();
 
@@ -44,8 +40,11 @@ public class CarView extends JFrame{
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, CarController cc) throws IOException {
+    public CarView(String framename, CarController cc, DrawPanel dP, int x, int y){
         this.carC = cc;
+        this.drawpanel = dP;
+        this.X = x;
+        this.Y = y;
         initComponents(framename);
     }
 
@@ -57,7 +56,7 @@ public class CarView extends JFrame{
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        this.add(drawPanel);
+        this.add(drawpanel);
 
 
 
