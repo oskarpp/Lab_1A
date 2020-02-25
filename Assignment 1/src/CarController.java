@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /*
@@ -25,7 +26,7 @@ public class CarController {
 
     //methods:
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Instance of this class
         CarController cc = new CarController();
         Saab95 s = new Saab95();

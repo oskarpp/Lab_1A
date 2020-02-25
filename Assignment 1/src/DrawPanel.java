@@ -15,12 +15,14 @@ public class DrawPanel extends JPanel{
 
     ArrayList<Car> carList = new ArrayList<>();
 
+    private Assets assets = new Assets();
+
     // TODO: Make this genereal for all cars
     void moveit(ArrayList<Car> cars){
         this.carList = cars;
     }
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
+    public DrawPanel(int x, int y) throws IOException {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
@@ -31,10 +33,15 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (Car car : carList) { // For-loop to draw every car every time
+        for(Car car : carList){
+            g.drawImage(assets.get(car),(int) car.getX(), (int) car.getY(), null);
+        }
+
+        /*for (Car car : carList) { // For-loop to draw every car every time
             int x =  (int) car.getX();
             int y = (int) car.getY();
             g.drawImage(car.carImg, x, y, null); // see javadoc for more info on the parameters
         }
+         */
     }
     }

@@ -20,12 +20,14 @@ public class Saab95 extends Car{
 	    turboOn = false;
         modelName = "Saab95";
         stopEngine();
+        /*
         try {
             carImg = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
         } catch (IOException ex)
         {
             ex.printStackTrace();
         }
+         */
     }
 
     /**

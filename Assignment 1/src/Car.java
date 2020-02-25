@@ -14,7 +14,7 @@ public abstract class Car implements Movable{
     public double currentSpeed; // The current speed of the car
     public Color color; // Color of the car
     public String modelName; //The car model name
-    public BufferedImage carImg;
+    //public BufferedImage carImg;
 
 
     /**
