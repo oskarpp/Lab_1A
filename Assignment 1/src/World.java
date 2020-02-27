@@ -10,23 +10,36 @@ public class World {
     int dPsizeX = 800;
     int dPsizeY = framesizeY - 240;
 
-    ArrayList<Car> cars = new ArrayList<>();
-    CarController carC = new CarController(cars);
+    ArrayList<Car> listOfCar = new ArrayList<>();
+    ArrayList<Movable> listOfMovable = new ArrayList<>();
+
+    CarController carC = new CarController(listOfCar);
     DrawPanel dP = new DrawPanel(dPsizeX, dPsizeY);
     CarView frame = new CarView("CarSim 1.0", carC, dP, framesizeX, framesizeY);
 
     /**
      * Konstruktor
      */
+    Car volvo;
+    Car saab;
+    Car scania;
 
     public World () throws IOException {
-        Saab95 s = new Saab95();
-        s.setY(100);
-        Scania sc = new Scania();
-        sc.setY(200);
-        cars.add(new Volvo240());
-        cars.add(s);
-        cars.add(sc);
+        volvo = new Volvo240();
+
+        saab = new Saab95();
+        saab.setY(100);
+
+        scania = new Scania();
+        scania.setY(200);
+
+        listOfCar.add(volvo);
+        listOfCar.add(saab);
+        listOfCar.add(scania);
+        listOfMovable.add(volvo);
+        listOfMovable.add(saab);
+        listOfMovable.add(scania);
+
         this.timer.start();
     }
 
@@ -35,40 +48,21 @@ public class World {
 
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Car car : cars) {
+            for (Movable m : listOfMovable) {
                 //Saves the position of the car before moving it. Is used in actionCollision, if we collide.
-                double beforeX = car.getX();
-                double beforeY = car.getY();
-                car.move();
-                if(intersects(car)){
-                    actionCollision(car, beforeX, beforeY);
+                double beforeX = m.getX();
+                double beforeY = m.getY();
+                m.move();
+                if(m.intersects(framesizeY, framesizeX)){
+                    m.actionCollision(beforeX, beforeY);
                 }
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
-                dP.moveit(cars);
+                int x = (int) Math.round(m.getX());
+                int y = (int) Math.round(m.getY());
+                dP.moveit(listOfMovable);
                 // repaint() calls the paintComponent method of the panel
                 dP.repaint();
             }
         }
-    }
-    public boolean intersects(Car car) {
-        int availableHeight = framesizeY-300; // Hard coded value is for the the height of the panel + the height of the car image. To be fixed
-        int availableWidth = framesizeX-100; // Hard coded value is for the width of the car image. To be fixed
-
-        boolean below = car.getY() > availableHeight;
-        boolean above = car.getY() < 0;
-        boolean left = car.getX() < 0;
-        boolean right = car.getX() > availableWidth;
-        return (above || below || left || right);
-    }
-    public void actionCollision(Car car, double x, double y){
-        car.setX(x);
-        car.setY(y);
-
-        car.stopEngine();
-        car.turnRight();
-        car.turnRight();
-        car.startEngine();
     }
 
 

@@ -43,29 +43,29 @@ public class CarController {
     } // Added for brake
     void setTurboOn() {
         for (Car car : cars){
-            if (car instanceof Saab95){
-                ((Saab95) car).setTurboOn();
+            if (car instanceof HasTurbo){
+                ((HasTurbo) car).setTurboOn();
             }
         }
     }
     void setTurboOff() {
         for (Car car : cars){
-            if (car instanceof Saab95){
-                ((Saab95) car).setTurboOff();
+            if (car instanceof HasTurbo){
+                ((HasTurbo) car).setTurboOff();
             }
         }
     }
     void liftFlatbed(){
         for (Car car : cars){
-            if (car instanceof Flatbed){
-                ((Flatbed) car).liftFlatbed();
+            if (car instanceof HasFlatbed){
+                ((HasFlatbed) car).liftFlatbed();
             }
         }
     }
     void lowerFlatbed(){
         for (Car car : cars){
-            if (car instanceof Flatbed){
-                ((Flatbed) car).lowerFlatbed();
+            if (car instanceof HasFlatbed){
+                ((HasFlatbed) car).lowerFlatbed();
             }
         }
     }

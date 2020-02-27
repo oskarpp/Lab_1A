@@ -207,4 +207,26 @@ public abstract class Car implements Movable{
     public void incrementSpeed(double amount){}
     public void decrementSpeed(double amount){}
 
+    /**
+     * Intersects and collision
+     */
+    public boolean intersects(int height, int width) {
+        int availableHeight = height-300; // Hard coded value is for the the height of the panel + the height of the car image. To be fixed
+        int availableWidth = width-100; // Hard coded value is for the width of the car image. To be fixed
+
+        boolean below = this.getY() > availableHeight;
+        boolean above = this.getY() < 0;
+        boolean left = this.getX() < 0;
+        boolean right = this.getX() > availableWidth;
+        return (above || below || left || right);
+    }
+    public void actionCollision(double x, double y){
+        this.setX(x);
+        this.setY(y);
+
+        this.stopEngine();
+        this.turnRight();
+        this.turnRight();
+        this.startEngine();
+    }
 }

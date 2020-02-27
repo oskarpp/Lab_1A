@@ -4,7 +4,7 @@ import java.util.Deque;
  * Subclass to Car. Adds methods for lowering and lifting flatbeds.
  * Adds variables related to the flatbeds.
  */
-public abstract class Flatbed extends Car{
+public abstract class Flatbed extends Car implements HasFlatbed{
 
     /**
      * flatbedAngle holds the value of the current angle of the flatbed

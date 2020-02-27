@@ -13,12 +13,12 @@ public class DrawPanel extends JPanel{
     // Just a single image, TODO: Generalize
     // To keep track of a singel cars position
 
-    ArrayList<Car> carList = new ArrayList<>();
+    ArrayList<Movable> carList = new ArrayList<>();
 
     private Assets assets = new Assets();
 
     // TODO: Make this genereal for all cars
-    void moveit(ArrayList<Car> cars){
+    void moveit(ArrayList<Movable> cars){
         this.carList = cars;
     }
     // Initializes the panel and reads the images
@@ -33,8 +33,8 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for(Car car : carList){
-            g.drawImage(assets.get(car),(int) car.getX(), (int) car.getY(), null);
+        for(Movable m : carList){
+            g.drawImage(assets.get(m),(int) m.getX(), (int) m.getY(), null);
         }
     }
 }
