@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class Autoshop <A extends Car>{
+public abstract class Autoshop <A extends Vehicle>{
 
     int maxSpace;
 
@@ -12,7 +12,7 @@ public abstract class Autoshop <A extends Car>{
         return list;
     }
 
-    A pickupCar(Car car){
+    A pickupCar(Vehicle car){
         return list.remove(list.indexOf(car));
     }
 

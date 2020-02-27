@@ -10,7 +10,7 @@ public class World {
     int dPsizeX = 800;
     int dPsizeY = framesizeY - 240;
 
-    ArrayList<Car> listOfCar = new ArrayList<>();
+    ArrayList<Vehicle> listOfCar = new ArrayList<>();
     ArrayList<Movable> listOfMovable = new ArrayList<>();
 
     CarController carC = new CarController(listOfCar);
@@ -20,9 +20,9 @@ public class World {
     /**
      * Konstruktor
      */
-    Car volvo;
-    Car saab;
-    Car scania;
+    Vehicle volvo;
+    Vehicle saab;
+    Vehicle scania;
 
     public World () throws IOException {
         volvo = new Volvo240();

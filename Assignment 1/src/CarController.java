@@ -19,63 +19,63 @@ public class CarController {
 
     // The frame that represents this instance View of the MVC pattern
     // A list of cars, modify if needed
-    ArrayList<Car> cars;
+    ArrayList<Vehicle> cars;
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
-    public CarController (ArrayList<Car> carFromWorld){
+    public CarController (ArrayList<Vehicle> carFromWorld){
         this.cars = carFromWorld;
     }
 
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             car.gas(gas);
         }
     }
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (Car car : cars){
+        for (Vehicle car : cars){
             car.brake(brake);
         }
     } // Added for brake
     void setTurboOn() {
-        for (Car car : cars){
+        for (Vehicle car : cars){
             if (car instanceof HasTurbo){
                 ((HasTurbo) car).setTurboOn();
             }
         }
     }
     void setTurboOff() {
-        for (Car car : cars){
+        for (Vehicle car : cars){
             if (car instanceof HasTurbo){
                 ((HasTurbo) car).setTurboOff();
             }
         }
     }
     void liftFlatbed(){
-        for (Car car : cars){
+        for (Vehicle car : cars){
             if (car instanceof HasFlatbed){
                 ((HasFlatbed) car).liftFlatbed();
             }
         }
     }
     void lowerFlatbed(){
-        for (Car car : cars){
+        for (Vehicle car : cars){
             if (car instanceof HasFlatbed){
                 ((HasFlatbed) car).lowerFlatbed();
             }
         }
     }
     void startCars(){
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             car.startEngine();
         }
     }
     void stopCars(){
-        for (Car car : cars){
+        for (Vehicle car : cars){
             car.stopEngine();
         }
     }

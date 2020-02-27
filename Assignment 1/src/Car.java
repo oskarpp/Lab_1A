@@ -5,228 +5,77 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
 
-public abstract class Car implements Movable{
+public abstract class Car extends Vehicle implements Loadable{
 
-    final static String INV_ARG = "Value not allowed"; //
-
-    public int nrDoors; // Number of doors on the car
-    public double enginePower; // Engine power of the car
-    public double currentSpeed; // The current speed of the car
-    public Color color; // Color of the car
-    public String modelName; //The car model name
 
     /**
      * Handling of cars transported on other cars.
      */
     public boolean isLoaded;
-    Deque<? super Car> stack = new ArrayDeque();
-    private void moveCar(double x, double y){
-        Iterator itr = getDeque().iterator();
-        while(itr.hasNext()){
-            Car car = (Car) itr.next();
-            car.setX(x);
-            car.setY(y);
-        }
+    public void setIsLoaded(boolean state){
+        this.isLoaded = state;
     }
-    public boolean isUnsafe;
-
-    /**
-     * Representations of Direction and position
-     */
-    private double x;
-    private double y;
-    private direction dir = direction.NORTH;
-    public enum direction{
-        NORTH, SOUTH, WEST, EAST
-    }
-
-    /**
-     * Getters
-     */
-    public double getX(){
-        return x;
-    }
-    public double getY(){
-        return y;
-    }
-    public direction getDir(){
-        return dir;
-    }
-    public int getNrDoors(){
-        return nrDoors;
-    }
-    public double getEnginePower(){
-        return enginePower;
-    }
-    public double getCurrentSpeed(){
-        return currentSpeed;
-    }
-    public Color getColor(){
-        return color;
-    }
-    public Deque getDeque(){ return stack;}
-
-    /**
-     * Setters
-     * @param clr which color should be set for the car
-     */
-    public void setColor(Color clr){
-        color = clr;
-    }
-    public void setX (double newX) { x = newX; }
-    public void setY (double newY) { y = newY; }
-    public void setDir (direction newDir){dir = newDir; }
-
-    /**
-     * Starts / Stops the engine (affects currentSpeed)
-     */
-    public void startEngine(){
-        currentSpeed = 0.1;
-    }
-    public void stopEngine(){
-        currentSpeed = 0;
-    }
-
-    /**
-     * Increases the speed of the car.
-      * @param amount a value in the interval [0,1]
-     */
-    public void gas(double amount) {
-        if (amount >= 0 && amount <= 1) {
-            double max = this.getEnginePower();
-            double i = this.getCurrentSpeed();
-            incrementSpeed(amount);
-            double j = this.getCurrentSpeed();
-            if (i > j) {
-                currentSpeed = i;
-            } else if (j > max) {
-                currentSpeed = max;
-            }
-        } else {
-            throw new IllegalArgumentException(INV_ARG);
-        }
-    }
-
-    /**
-     * Decreases the speed of the car
-     * @param amount a value in the interval [0,1]
-     */
-    public void brake(double amount) {
-        if (amount >= 0 && amount <= 1){
-            double min = 0;
-            double i = this.getCurrentSpeed();
-            decrementSpeed(amount);
-            double j = this.getCurrentSpeed();
-            if (i < j){
-                currentSpeed = i;
-            } else if (j < min) {
-                currentSpeed = min;
-            }
-        } else { throw new IllegalArgumentException(INV_ARG);
-        }
+    public boolean getIsLoaded(){
+        return isLoaded;
     }
 
     /**
      * Moves the car in the current direction, turns the car left or right
      */
+    @Override
     public void move() {
         if(isLoaded){
             throw new IllegalArgumentException("Car cannot move, is loaded on another truck.");
         }
-        if(isUnsafe){
-            throw new IllegalArgumentException("Car cannot move. Flatbed in the wrong position.");
+        if (getDir() == direction.SOUTH){
+            setY(getY() - currentSpeed);
         }
-        if (dir == direction.SOUTH){
-            setY(y - currentSpeed);
-            if (getDeque().size() != 0) {
-                double x = getX();
-                double y = getY();
-                moveCar(x, y);
-            }
+        if (getDir() == direction.NORTH){
+            setY(getY() + currentSpeed);
         }
-        if (dir == direction.NORTH){
-            setY(y + currentSpeed);
-            if (getDeque().size() != 0) {
-                double x = getX();
-                double y = getY();
-                moveCar(x, y);
-            }
+        if (getDir() == direction.WEST){
+            setX(getX() - currentSpeed);
         }
-        if (dir == direction.WEST){
-            setX(x - currentSpeed);
-            if (getDeque().size() != 0) {
-                double x = getX();
-                double y = getY();
-                moveCar(x, y);
-            }
+        if (getDir() == direction.EAST){
+            setX(getX() + currentSpeed);
         }
-        if (dir == direction.EAST){
-            setX(x + currentSpeed);
-            if (getDeque().size() != 0) {
-                double x = getX();
-                double y = getY();
-                moveCar(x, y);
-            }
-        }
-
-
     }
+    @Override
     public void turnLeft() {
-        if (dir == direction.SOUTH){
+        if(isLoaded){
+            throw new IllegalArgumentException("Car cannot move, is loaded on another truck.");
+        }
+        if (getDir() == direction.SOUTH){
             setDir(direction.EAST);
         }
-        else if (dir == direction.EAST){
+        else if (getDir() == direction.EAST){
             setDir(direction.NORTH);
         }
-        else if (dir == direction.NORTH){
+        else if (getDir() == direction.NORTH){
             setDir(direction.WEST);
         }
-        else if (dir == direction.WEST){
+        else if (getDir() == direction.WEST){
             setDir(direction.SOUTH);
         }
     }
+    @Override
     public void turnRight() {
-        if (dir == direction.SOUTH){
+        if(isLoaded){
+            throw new IllegalArgumentException("Car cannot move, is loaded on another truck.");
+        }
+        if (getDir() == direction.SOUTH){
             setDir(direction.WEST);
         }
-        else if (dir == direction.EAST){
+        else if (getDir() == direction.EAST){
             setDir(direction.SOUTH);
         }
-        else if (dir == direction.NORTH){
+        else if (getDir() == direction.NORTH){
             setDir(direction.EAST);
         }
-        else if (dir == direction.WEST){
+        else if (getDir() == direction.WEST){
             setDir(direction.NORTH);
         }
     }
 
-    /**
-     * Is called from the gas/brake method.
-     * Does nothing unless a  method with the same name is also defined as Override in the car subclass
-     */
-    public void incrementSpeed(double amount){}
-    public void decrementSpeed(double amount){}
 
-    /**
-     * Intersects and collision
-     */
-    public boolean intersects(int height, int width) {
-        int availableHeight = height-300; // Hard coded value is for the the height of the panel + the height of the car image. To be fixed
-        int availableWidth = width-100; // Hard coded value is for the width of the car image. To be fixed
-
-        boolean below = this.getY() > availableHeight;
-        boolean above = this.getY() < 0;
-        boolean left = this.getX() < 0;
-        boolean right = this.getX() > availableWidth;
-        return (above || below || left || right);
-    }
-    public void actionCollision(double x, double y){
-        this.setX(x);
-        this.setY(y);
-
-        this.stopEngine();
-        this.turnRight();
-        this.turnRight();
-        this.startEngine();
-    }
 }

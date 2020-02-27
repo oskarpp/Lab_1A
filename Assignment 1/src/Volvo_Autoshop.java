@@ -6,7 +6,7 @@ public class Volvo_Autoshop extends Autoshop<Volvo240>{
     }
 
     @Override
-    Volvo240 pickupCar(Car car){
+    Volvo240 pickupCar(Vehicle car){
         return super.pickupCar(car);
     }
     @Override

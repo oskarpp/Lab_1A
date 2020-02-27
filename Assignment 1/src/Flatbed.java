@@ -4,7 +4,7 @@ import java.util.Deque;
  * Subclass to Car. Adds methods for lowering and lifting flatbeds.
  * Adds variables related to the flatbeds.
  */
-public abstract class Flatbed extends Car implements HasFlatbed{
+public abstract class Flatbed extends Vehicle implements HasFlatbed{
 
     /**
      * flatbedAngle holds the value of the current angle of the flatbed
@@ -19,6 +19,10 @@ public abstract class Flatbed extends Car implements HasFlatbed{
      * The allowed angle for a truck to be able to drive
      */
     int safeAngle;
+    /**
+     * Check if flatbed in a safe position
+     */
+    public boolean isUnsafe;
     /**
      * Added to the end of each lift/lower ramp to update the isSafe flag
      */
@@ -114,6 +118,10 @@ public abstract class Flatbed extends Car implements HasFlatbed{
             flatbedAngle = minAngle;
         }
         checkIfSafe();
+    }
+
+    public void move(){
+
     }
 
 

@@ -1,13 +1,23 @@
 import java.awt.*;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
+import java.util.*;
 import java.util.List;
 
 /**
  * A flatbed Car that is able to load cars that does not have a flatbed.
  */
-public class CarTransporter extends Flatbed{
+public class CarTransporter extends Flatbed implements CarContainer{
+
+    public Deque getDeque(){ return stack;}
+    Deque<Loadable> stack = new ArrayDeque();
+
+    private void moveCar(double x, double y){
+        Iterator itr = getDeque().iterator();
+        while(itr.hasNext()){
+            Car car = (Car) itr.next();
+            car.setX(x);
+            car.setY(y);
+        }
+    }
 
     public CarTransporter(){
         nrDoors = 2;
@@ -59,7 +69,7 @@ public class CarTransporter extends Flatbed{
      * Loads a car onto the CarTransporter if it meets the requirements. Error handling added.
      * @param car a Car that is not a flatbed truck.
      */
-    public void loadCar(Car car){
+    public void loadCar(Loadable car){
         if(car instanceof Flatbed){
             throw new IllegalArgumentException("Too big. Cannot load flatbed trucks.");
         }
@@ -67,14 +77,14 @@ public class CarTransporter extends Flatbed{
             throw new IllegalArgumentException("Too far away, cannot load.");
         } else if (getDeque().size() == maxCapacity) {
             throw new IllegalArgumentException("Transport is full.");
-        } else if(car.isLoaded){
+        } else if(car.getIsLoaded() == true){
             throw new IllegalArgumentException("This car is already loaded.");
         }
         else if(this.getFlatbedAngle() != minAngle){
             throw new IllegalArgumentException("Ramp is up, cannot load.");
         } else {
             getDeque().push(car);
-            car.isLoaded = true;
+            car.setIsLoaded(true);
         }
     }
 
@@ -88,6 +98,23 @@ public class CarTransporter extends Flatbed{
         } else {
             throw new IllegalArgumentException("Ramp is up, cannot unload.");
         }
+    }
+
+    @Override
+    public void move(){
+        if (getDir() == direction.SOUTH){
+            setY(getY() - currentSpeed);
+        }
+        if (getDir() == direction.NORTH){
+            setY(getY() + currentSpeed);
+        }
+        if (getDir() == direction.WEST){
+            setX(getX() - currentSpeed);
+        }
+        if (getDir() == direction.EAST){
+            setX(getX() + currentSpeed);
+        }
+        moveCar(getX(), getY());
     }
 
 }
