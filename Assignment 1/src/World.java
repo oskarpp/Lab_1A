@@ -14,7 +14,7 @@ public class World {
     ArrayList<Movable> listOfMovable = new ArrayList<>();
 
     CarController carC = new CarController(listOfCar);
-    DrawPanel dP = new DrawPanel(dPsizeX, dPsizeY);
+    DrawPanel dP = new DrawPanel(dPsizeX, dPsizeY, listOfMovable);
     CarView frame = new CarView("CarSim 1.0", carC, dP, framesizeX, framesizeY);
 
     /**
@@ -56,9 +56,6 @@ public class World {
                 if(m.intersects(framesizeY, framesizeX)){
                     m.actionCollision(beforeX, beforeY);
                 }
-                int x = (int) Math.round(m.getX());
-                int y = (int) Math.round(m.getY());
-                dP.moveit(listOfMovable);
                 // repaint() calls the paintComponent method of the panel
                 dP.repaint();
             }

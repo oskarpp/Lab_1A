@@ -13,19 +13,16 @@ public class DrawPanel extends JPanel{
     // Just a single image, TODO: Generalize
     // To keep track of a singel cars position
 
-    ArrayList<Movable> carList = new ArrayList<>();
+    ArrayList<Movable> listOfMovable;
 
     private Assets assets = new Assets();
 
-    // TODO: Make this genereal for all cars
-    void moveit(ArrayList<Movable> cars){
-        this.carList = cars;
-    }
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) throws IOException {
+    public DrawPanel(int x, int y, ArrayList<Movable> movables) throws IOException {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
+        this.listOfMovable = movables;
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
@@ -33,7 +30,7 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for(Movable m : carList){
+        for(Movable m : listOfMovable){
             g.drawImage(assets.get(m),(int) m.getX(), (int) m.getY(), null);
         }
     }
