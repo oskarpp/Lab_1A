@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -197,5 +198,26 @@ public class CarView extends JFrame{
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public final int delay = 50;
+    public Timer timer = new Timer(delay, new TimerListener());
+
+    private class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            ArrayList<Vehicle> listOfVehicles = carC.listOfVehicles;
+            drawpanel.listOfVehicles = carC.listOfVehicles;
+            for (Movable m : listOfVehicles) {
+                //Saves the position of the car before moving it. Is used in actionCollision, if we collide.
+                double beforeX = m.getX();
+                double beforeY = m.getY();
+                m.move();
+                if(m.intersects(Y, X)){
+                    m.actionCollision(beforeX, beforeY);
+                }
+                // repaint() calls the paintComponent method of the panel
+                drawpanel.repaint();
+            }
+        }
     }
 }

@@ -10,12 +10,12 @@ public class World {
     int dPsizeX = 800;
     int dPsizeY = framesizeY - 240;
 
-    ArrayList<Vehicle> listOfCar = new ArrayList<>();
+    ArrayList<Vehicle> listOfVehicles = new ArrayList<>();
 
-    ArrayList<Movable> listOfMovable = new ArrayList<>();
+    //ArrayList<Movable> listOfMovable = new ArrayList<>();
 
-    CarController carC = new CarController(listOfCar);
-    DrawPanel dP = new DrawPanel(dPsizeX, dPsizeY, listOfMovable, listOfCar);
+    CarController carC = new CarController(listOfVehicles);
+    DrawPanel dP = new DrawPanel(dPsizeX, dPsizeY);
     CarView frame = new CarView("CarSim 1.0", carC, dP, framesizeX, framesizeY);
 
     /**
@@ -25,9 +25,9 @@ public class World {
 
     public World () throws IOException {
 
-        this.timer.start();
+        frame.timer.start();
     }
-
+/*
     private final int delay = 50;
     private Timer timer = new Timer(delay, new TimerListener());
 
@@ -43,9 +43,8 @@ public class World {
                 }
                 // repaint() calls the paintComponent method of the panel
                 dP.repaint();
-                listOfCar = carC.getList();
             }
         }
     }
-
+    */
 }
