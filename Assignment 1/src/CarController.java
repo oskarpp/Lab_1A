@@ -10,7 +10,7 @@ import java.util.ArrayList;
 * modifying the model state and the updating the view.
  */
  // TEST kommentar!
-public class CarController implements IList{
+public class CarController implements CheckForNewVehicle{
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -20,11 +20,13 @@ public class CarController implements IList{
     // The frame that represents this instance View of the MVC pattern
     // A list of cars, modify if needed
     //ArrayList<Vehicle> cars;
+    ArrayList<Vehicle> listOfCar = new ArrayList<>();
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
-    public CarController (){
+    public CarController (ArrayList<Vehicle> listOfCar){
+        this.listOfCar = listOfCar;
     }
 
     // Calls the gas method for each car once
@@ -79,9 +81,18 @@ public class CarController implements IList{
         }
     }
 
-    void addCar(){
-        Vehicle v = VehicleFactory.createVehicle();
-        listOfMovable.add(v);
+    Vehicle addCar(){
+        Vehicle v = new Volvo240();
+        //listOfMovable.add(v);
         listOfCar.add(v);
+        return v;
+    }
+    void removeCar() {
+        listOfCar.remove(0);
+    }
+
+    @Override
+    public ArrayList<Vehicle> getList() {
+        return listOfCar;
     }
 }

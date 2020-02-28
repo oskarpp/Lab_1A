@@ -4,15 +4,18 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class World implements IList{
+public class World {
     int framesizeX = 800;
     int framesizeY = 800;
     int dPsizeX = 800;
     int dPsizeY = framesizeY - 240;
 
+    ArrayList<Vehicle> listOfCar = new ArrayList<>();
 
-    CarController carC = new CarController();
-    DrawPanel dP = new DrawPanel(dPsizeX, dPsizeY);
+    ArrayList<Movable> listOfMovable = new ArrayList<>();
+
+    CarController carC = new CarController(listOfCar);
+    DrawPanel dP = new DrawPanel(dPsizeX, dPsizeY, listOfMovable, listOfCar);
     CarView frame = new CarView("CarSim 1.0", carC, dP, framesizeX, framesizeY);
 
     /**
@@ -40,6 +43,7 @@ public class World implements IList{
                 }
                 // repaint() calls the paintComponent method of the panel
                 dP.repaint();
+                listOfCar = carC.getList();
             }
         }
     }
