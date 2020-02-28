@@ -114,16 +114,42 @@ public abstract class Flatbed extends Vehicle implements HasFlatbed{
         checkIfSafe();
     }
     public void flatbedDecrement(){
-        if(getCurrentSpeed() == 0){
             flatbedAngle = minAngle;
+            checkIfSafe();
+    }
+
+    public void move() {
+        if(!isUnsafe) {
+            if (getDir() == direction.SOUTH) {
+                setY(getY() - currentSpeed);
+            }
+            if (getDir() == direction.NORTH) {
+                setY(getY() + currentSpeed);
+            }
+            if (getDir() == direction.WEST) {
+                setX(getX() - currentSpeed);
+            }
+            if (getDir() == direction.EAST) {
+                setX(getX() + currentSpeed);
+            }
+       }
+
+    }
+    @Override
+    public void gas(double amount) {
+        if (!isUnsafe){
+        if (amount >= 0 && amount <= 1) {
+            double max = this.getEnginePower();
+            double i = this.getCurrentSpeed();
+            incrementSpeed(amount);
+            double j = this.getCurrentSpeed();
+            if (i > j) {
+                currentSpeed = i;
+            } else if (j > max) {
+                currentSpeed = max;
+            }
         }
-        checkIfSafe();
+        } else {
+        }
     }
-
-    public void move(){
-
-    }
-
-
-
 }

@@ -11,7 +11,7 @@ public abstract class Car extends Vehicle implements Loadable{
     /**
      * Handling of cars transported on other cars.
      */
-    public boolean isLoaded;
+    private boolean isLoaded;
     public void setIsLoaded(boolean state){
         this.isLoaded = state;
     }

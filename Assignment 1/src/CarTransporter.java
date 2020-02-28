@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * A flatbed Car that is able to load cars that does not have a flatbed.
  */
-public class CarTransporter extends Flatbed implements CarContainer{
+public class CarTransporter extends Flatbed{
 
     public Deque getDeque(){ return stack;}
     Deque<Loadable> stack = new ArrayDeque();
@@ -93,8 +93,8 @@ public class CarTransporter extends Flatbed implements CarContainer{
      */
     public void unloadCar(){
         if(this.getFlatbedAngle() == minAngle){
-            Car x = (Car) getDeque().pop();
-            x.isLoaded = false;
+            Loadable x = (Car) getDeque().pop();
+            x.setIsLoaded(false);
         } else {
             throw new IllegalArgumentException("Ramp is up, cannot unload.");
         }

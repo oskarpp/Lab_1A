@@ -154,12 +154,18 @@ public class test {
     /**
      * Making sure that the car cannot move if the Flatbed is in an unsafe position
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void checkFlatbedSafe(){
         test3.liftFlatbed(30);
+        double x = test3.getX();
+        double y = test3.getY();
         test3.startEngine();
         test3.gas(0.5);
         test3.move();
+        double ax = test3.getX();
+        double yx = test3.getY();
+        assertTrue(x == ax && y == yx);
+
     }
     /**
      * Check that the ramp can only be lowered if carTransport is standing still
