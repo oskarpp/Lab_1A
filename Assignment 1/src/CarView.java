@@ -39,6 +39,9 @@ public class CarView extends JFrame{
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
+    JButton addCarButton = new JButton("Add");
+    JButton removeCarButton = new JButton("Remove");
+
     // Constructor
     public CarView(String framename, CarController cc, DrawPanel dP, int x, int y){
         this.carC = cc;
@@ -78,7 +81,7 @@ public class CarView extends JFrame{
 
         this.add(gasPanel);
 
-        controlPanel.setLayout(new GridLayout(2,4));
+        controlPanel.setLayout(new GridLayout(2,10));
 
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
@@ -86,7 +89,11 @@ public class CarView extends JFrame{
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
-        controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
+        controlPanel.add(startButton,6);
+        controlPanel.add(stopButton, 7);
+        //controlPanel.add(addCarButton, 8);
+        //controlPanel.add(removeCarButton, 9);
+        controlPanel.setPreferredSize(new Dimension(((X/2)+4), 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
 
@@ -101,6 +108,18 @@ public class CarView extends JFrame{
         stopButton.setForeground(Color.black);
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
+
+        addCarButton.setBackground(Color.CYAN);
+        addCarButton.setForeground(Color.black);
+        addCarButton.setPreferredSize(new Dimension(X/5-15, 20));
+        controlPanel.add(addCarButton);
+
+        removeCarButton.setBackground(Color.CYAN);
+        removeCarButton.setForeground(Color.black);
+        removeCarButton.setPreferredSize(new Dimension(X/5-15, 20));
+        controlPanel.add(removeCarButton);
+
+
 
         // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
@@ -150,6 +169,13 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.stopCars();
+            }
+        });
+
+        addCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.addCar();
             }
         });
 

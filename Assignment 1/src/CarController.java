@@ -10,7 +10,7 @@ import java.util.ArrayList;
 * modifying the model state and the updating the view.
  */
  // TEST kommentar!
-public class CarController {
+public class CarController implements IList{
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -19,64 +19,69 @@ public class CarController {
 
     // The frame that represents this instance View of the MVC pattern
     // A list of cars, modify if needed
-    ArrayList<Vehicle> cars;
+    //ArrayList<Vehicle> cars;
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
-    public CarController (ArrayList<Vehicle> carFromWorld){
-        this.cars = carFromWorld;
+    public CarController (){
     }
 
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Vehicle car : cars) {
+        for (Vehicle car : listOfCar) {
             car.gas(gas);
         }
     }
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (Vehicle car : cars){
+        for (Vehicle car : listOfCar){
             car.brake(brake);
         }
     } // Added for brake
     void setTurboOn() {
-        for (Vehicle car : cars){
+        for (Vehicle car : listOfCar){
             if (car instanceof HasTurbo){
                 ((HasTurbo) car).setTurboOn();
             }
         }
     }
     void setTurboOff() {
-        for (Vehicle car : cars){
+        for (Vehicle car : listOfCar){
             if (car instanceof HasTurbo){
                 ((HasTurbo) car).setTurboOff();
             }
         }
     }
     void liftFlatbed(){
-        for (Vehicle car : cars){
+        for (Vehicle car : listOfCar){
             if (car instanceof HasFlatbed){
                 ((HasFlatbed) car).liftFlatbed();
             }
         }
     }
     void lowerFlatbed(){
-        for (Vehicle car : cars){
+        for (Vehicle car : listOfCar){
             if (car instanceof HasFlatbed){
                 ((HasFlatbed) car).lowerFlatbed();
             }
         }
     }
     void startCars(){
-        for (Vehicle car : cars) {
+        for (Vehicle car : listOfCar) {
             car.startEngine();
         }
     }
     void stopCars(){
-        for (Vehicle car : cars){
+        for (Vehicle car : listOfCar){
             car.stopEngine();
         }
+    }
+
+    void addCar(){
+        Vehicle v = VehicleFactory.createVehicle();
+        listOfMovable.add(v);
+        listOfCar.add(v);
     }
 }
