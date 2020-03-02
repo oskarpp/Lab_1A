@@ -39,8 +39,8 @@ public class World implements IList{
                     m.actionCollision(beforeX, beforeY);
                 }
                 // repaint() calls the paintComponent method of the panel
-                dP.repaint();
             }
+            dP.repaint();
         }
     }
 

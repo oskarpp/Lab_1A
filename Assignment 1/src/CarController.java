@@ -84,4 +84,13 @@ public class CarController implements IList{
         listOfMovable.add(v);
         listOfCar.add(v);
     }
+    void removeCar(){
+        if(listOfMovable.size() != 0 && listOfCar.size() != 0){
+            listOfMovable.remove(0);
+            listOfCar.remove(0);
+        } else {
+
+        }
+
+    }
 }
