@@ -20,11 +20,15 @@ public class CarController implements IList{
     // The frame that represents this instance View of the MVC pattern
     // A list of cars, modify if needed
     //ArrayList<Vehicle> cars;
-
+    int framesizeX;
+    int framesizeY;
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
-    public CarController (){ }
+    public CarController (int framesizeX, int framesizeY){
+        this.framesizeX = framesizeX;
+        this.framesizeY = framesizeY;
+    }
 
     // Calls the gas method for each car once
     void gas(int amount) {
@@ -79,8 +83,11 @@ public class CarController implements IList{
     }
 
     void addCar(){
-        Vehicle v = VehicleFactory.createVehicle();
-        listOfCar.add(v);
+        if(listOfCar.size() < 10){
+            Vehicle v = VolvoFactory.createVolvo240();
+            listOfCar.add(v);
+        } else {/*do nothing*/}
+
     }
     void removeCar(){
         if(listOfCar.size() != 0){
@@ -90,12 +97,12 @@ public class CarController implements IList{
     }
 
     void moveOnTick(){
-        for (Movable m : listOfCar) {
+        for (Vehicle m : listOfCar) {
             //Saves the position of the car before moving it. Is used in actionCollision, if we collide.
             double beforeX = m.getX();
             double beforeY = m.getY();
             m.move();
-            if(m.intersects(800, 800)){
+            if(m.intersects(framesizeY, framesizeX)){
                 m.actionCollision(beforeX, beforeY);
             }
             // repaint() calls the paintComponent method of the panel

@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
-public class Volvo240 extends Car{
+public class Volvo240 extends Car {
 
     private final static double trimFactor = 1.25;
 
