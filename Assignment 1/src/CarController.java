@@ -24,8 +24,7 @@ public class CarController implements IList{
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
-    public CarController (){
-    }
+    public CarController (){ }
 
     // Calls the gas method for each car once
     void gas(int amount) {
@@ -81,16 +80,25 @@ public class CarController implements IList{
 
     void addCar(){
         Vehicle v = VehicleFactory.createVehicle();
-        listOfMovable.add(v);
         listOfCar.add(v);
     }
     void removeCar(){
-        if(listOfMovable.size() != 0 && listOfCar.size() != 0){
-            listOfMovable.remove(0);
+        if(listOfCar.size() != 0){
             listOfCar.remove(0);
-        } else {
+        } else { /*Does not do anything!*/}
 
+    }
+
+    void moveOnTick(){
+        for (Movable m : listOfCar) {
+            //Saves the position of the car before moving it. Is used in actionCollision, if we collide.
+            double beforeX = m.getX();
+            double beforeY = m.getY();
+            m.move();
+            if(m.intersects(800, 800)){
+                m.actionCollision(beforeX, beforeY);
+            }
+            // repaint() calls the paintComponent method of the panel
         }
-
     }
 }

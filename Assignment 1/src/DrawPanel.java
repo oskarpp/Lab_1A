@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,21 +18,33 @@ public class DrawPanel extends JPanel implements IList{
     //ArrayList<Movable> listOfMovable;
 
     private Assets assets = new Assets();
+    CarController c;
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) throws IOException {
+    public DrawPanel(int x, int y, CarController c) throws IOException {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
+        this.c = c;
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
     // TODO: Change to suit your needs.
 
+    private final int delay = 50;
+    public Timer timer = new Timer(delay, new TimerListener());
+
+    private class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            c.moveOnTick();
+            repaint();
+        }
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for(Movable m : listOfMovable){
+        for(Movable m : listOfCar){
             g.drawImage(assets.get(m),(int) m.getX(), (int) m.getY(), null);
         }
     }

@@ -6,7 +6,7 @@ public interface IList {
 
     ArrayList<Vehicle> listOfCar = new ArrayList<>();
 
-    ArrayList<Movable> listOfMovable = new ArrayList<>();
+    //ArrayList<Vehicle> listOfMovable = new ArrayList<>();
 
     //Deque<Loadable> stack = new ArrayDeque();
 
