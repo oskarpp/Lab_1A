@@ -216,8 +216,9 @@ public class CarView extends JFrame{
                     m.actionCollision(beforeX, beforeY);
                 }
                 // repaint() calls the paintComponent method of the panel
-                drawpanel.repaint();
             }
+            drawpanel.repaint();
+
         }
     }
 }

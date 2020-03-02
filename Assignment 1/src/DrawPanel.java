@@ -39,6 +39,6 @@ public class DrawPanel extends JPanel {
                 g.drawImage(assets.get(m), (int) m.getX(), (int) m.getY(), null);
 
             }
-            }
+        }
     }
 }
