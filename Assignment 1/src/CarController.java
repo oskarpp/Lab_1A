@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -84,7 +85,7 @@ public class CarController implements IList{
 
     void addCar(){
         if(listOfCar.size() < 10){
-            Vehicle v = VolvoFactory.createVolvo240();
+            Vehicle v = VolvoFactory.createVolvo240();;
             listOfCar.add(v);
         } else {/*do nothing*/}
 
@@ -98,14 +99,7 @@ public class CarController implements IList{
 
     void moveOnTick(){
         for (Vehicle m : listOfCar) {
-            //Saves the position of the car before moving it. Is used in actionCollision, if we collide.
-            double beforeX = m.getX();
-            double beforeY = m.getY();
-            m.move();
-            if(m.intersects(framesizeY, framesizeX)){
-                m.actionCollision(beforeX, beforeY);
-            }
-            // repaint() calls the paintComponent method of the panel
+            m.movement(m, framesizeY, framesizeX);
         }
     }
 }

@@ -18,6 +18,9 @@ public class CarView extends JFrame{
     private static int X;
     private static int Y;
 
+    int dPsizeX;
+    int dPsizeY;
+
     // The controller member
     CarController carC;
     DrawPanel drawpanel;
@@ -43,11 +46,13 @@ public class CarView extends JFrame{
     JButton removeCarButton = new JButton("Remove");
 
     // Constructor
-    public CarView(String framename, CarController cc, DrawPanel dP, int x, int y){
-        this.carC = cc;
-        this.drawpanel = dP;
+    public CarView(String framename, CarController cc, int x, int y) throws IOException {
         this.X = x;
         this.Y = y;
+        this.dPsizeX = x;
+        this.dPsizeY = y - 240;
+        this.carC = cc;
+        this.drawpanel = new DrawPanel(dPsizeX, dPsizeY);
         initComponents(framename);
     }
 
@@ -196,5 +201,15 @@ public class CarView extends JFrame{
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    private final int delay = 50;
+    public Timer timer = new Timer(delay, new TimerListener());
+
+    private class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            carC.moveOnTick();
+            drawpanel.repaint();
+        }
     }
 }

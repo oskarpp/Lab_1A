@@ -182,5 +182,15 @@ public abstract class Vehicle implements Movable{
         this.startEngine();
     }
 
+    public void movement(Vehicle m, int framesizeY, int framesizeX){
+        //Saves the position of the car before moving it. Is used in actionCollision, if we collide.
+        double beforeX = m.getX();
+        double beforeY = m.getY();
+        m.move();
+        if(m.intersects(framesizeY, framesizeX)){
+            m.actionCollision(beforeX, beforeY);
+        }
+    }
+
 
 }

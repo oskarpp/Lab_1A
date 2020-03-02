@@ -18,19 +18,19 @@ public class DrawPanel extends JPanel implements IList{
     //ArrayList<Movable> listOfMovable;
 
     private Assets assets = new Assets();
-    CarController c;
+
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, CarController c) throws IOException {
+    public DrawPanel(int x, int y) throws IOException {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
-        this.c = c;
+
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
     // TODO: Change to suit your needs.
-
+    /*
     private final int delay = 50;
     public Timer timer = new Timer(delay, new TimerListener());
 
@@ -40,6 +40,8 @@ public class DrawPanel extends JPanel implements IList{
             repaint();
         }
     }
+
+     */
 
     @Override
     protected void paintComponent(Graphics g) {
